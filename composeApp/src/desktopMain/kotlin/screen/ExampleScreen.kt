@@ -2,6 +2,8 @@ package screen
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ContextMenuDataProvider
+import androidx.compose.foundation.ContextMenuItem
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.HorizontalScrollbar
 import androidx.compose.foundation.PointerMatcher
@@ -28,6 +30,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Surface
@@ -62,7 +65,7 @@ import cafe.adriel.voyager.core.screen.Screen
 class ExampleScreen : Screen {
     @Composable
     override fun Content() {
-        DraggableContent()
+        ContextMenuContent()
     }
 }
 
@@ -307,5 +310,57 @@ fun DraggableContent(modifier: Modifier = Modifier) {
             text = "Draggable",
             color = Color.White
         )
+    }
+}
+
+
+// Cut Copy Paste by default not allowed on Text but allowed on TextField in jetpack compose.Here is the example.
+@Composable
+fun WhyNeedContextMenuContent(modifier: Modifier = Modifier) {
+    var text by remember {
+        mutableStateOf("")
+    }
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        TextField(value = text, onValueChange = {
+            text = it
+        })
+        Spacer(modifier = modifier.height(12.dp))
+        Text(text = "Hello World!")
+    }
+}
+
+@Composable
+fun ContextMenuContent(modifier: Modifier = Modifier) {
+    var text by remember {
+        mutableStateOf("")
+    }
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        ContextMenuDataProvider(
+            items = {
+                listOf(
+                    ContextMenuItem(
+                        label = "Custom Action"
+                    ) {
+                        println("Custom Action Clicked!")
+                    }
+                )
+            }
+        ) {
+            TextField(value = text, onValueChange = {
+                text = it
+            })
+            Spacer(modifier = modifier.height(12.dp))
+            SelectionContainer {
+                Text(text = "Hello World!")
+            }
+        }
     }
 }
