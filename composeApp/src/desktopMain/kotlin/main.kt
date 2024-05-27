@@ -12,6 +12,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
@@ -31,7 +35,14 @@ fun main() = application {
 
     Window(
         onCloseRequest = ::exitApplication,
-        title = "DesktopApp",
+        title = "DesktopApp", onKeyEvent = {
+            if (it.key == Key.Delete && it.type == KeyEventType.KeyUp) {
+                println("Delete key pressed")
+                true
+            } else {
+                false
+            }
+        }
     ) {
         App()
 //        if (secondWindowOpened) {
