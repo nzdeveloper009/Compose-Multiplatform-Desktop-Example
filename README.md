@@ -9,3 +9,15 @@ This is a Kotlin Multiplatform project targeting Desktop.
 
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+
+# Topics Cover:
+- Serailization and KTOR for api handling
+- [Voyager Navigator](https://voyager.adriel.cafe/)
+- Scrollable List
+- ScrollableLazyList
+- ToolTips
+- KeyEventContent
+- ClickEventContent (Single, Double, Long)
+- MouseHoverContent
+- DraggableContent
+- ContextMenuContent
