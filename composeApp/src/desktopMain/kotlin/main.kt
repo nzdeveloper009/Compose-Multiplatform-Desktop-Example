@@ -20,43 +20,43 @@ import api.ApiService
 import kotlinx.coroutines.launch
 
 fun main() = application {
-    var secondWindowOpened by remember {
-        mutableStateOf(true)
-    }
-    var apiResponse by remember {
-        mutableStateOf("Waiting...")
-    }
-
-    val scope = rememberCoroutineScope()
+//    var secondWindowOpened by remember {
+//        mutableStateOf(true)
+//    }
+//    var apiResponse by remember {
+//        mutableStateOf("Waiting...")
+//    }
+//
+//    val scope = rememberCoroutineScope()
 
     Window(
         onCloseRequest = ::exitApplication,
         title = "DesktopApp",
     ) {
         App()
-        if (secondWindowOpened) {
-            Window(
-                onCloseRequest = { secondWindowOpened = false },
-                title = "New Window",
-                state = WindowState(width = 300.dp, height = 600.dp),
-                resizable = false
-            ) {
-                Column(
-                    Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Button(onClick = {
-                        scope.launch {
-                            apiResponse = ApiService().fetchData()
-                        }
-                    }) {
-                        Text("Click me!")
-                    }
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Text(text = apiResponse)
-                }
-            }
-        }
+//        if (secondWindowOpened) {
+//            Window(
+//                onCloseRequest = { secondWindowOpened = false },
+//                title = "New Window",
+//                state = WindowState(width = 300.dp, height = 600.dp),
+//                resizable = false
+//            ) {
+//                Column(
+//                    Modifier.fillMaxSize(),
+//                    horizontalAlignment = Alignment.CenterHorizontally,
+//                    verticalArrangement = Arrangement.Center
+//                ) {
+//                    Button(onClick = {
+//                        scope.launch {
+//                            apiResponse = ApiService().fetchData()
+//                        }
+//                    }) {
+//                        Text("Click me!")
+//                    }
+//                    Spacer(modifier = Modifier.height(12.dp))
+//                    Text(text = apiResponse)
+//                }
+//            }
+//        }
     }
 }
